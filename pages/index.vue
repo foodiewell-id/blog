@@ -1,3 +1,5 @@
 <template>
-  <div class="bg-red-200">hello world!</div>
+  <div class="container mx-auto my-5">
+    <Breadcrumb />
+  </div>
 </template>

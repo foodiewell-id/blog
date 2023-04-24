@@ -1,23 +1,25 @@
-const navLinks = [
+import Link from "~/types/Link";
+
+const navLinks: Link[] = [
   {
     name: "Beranda",
-    to: "https://foodiewell.id",
+    link: "https://foodiewell.id",
   },
   {
     name: "Tentang Kami",
-    to: "https://foodiewell.id/about",
+    link: "https://foodiewell.id/about",
   },
   {
     name: "Ahli Gizi",
-    to: "https://foodiewell.id/ahli-gizi",
+    link: "https://foodiewell.id/ahli-gizi",
   },
   {
     name: "Artikel",
-    to: "/",
+    link: "/",
   },
   {
     name: "Tanya Mindi",
-    to: "https://foodiewell.id/mindi",
+    link: "https://foodiewell.id/mindi",
   },
 ];
 

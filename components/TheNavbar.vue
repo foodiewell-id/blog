@@ -33,7 +33,7 @@ const isDrawerOpened = ref(false);
               <ul class="flex flex-col gap-8 p-5">
                 <template v-for="link in navLinks" :key="link.name">
                   <li>
-                    <NuxtLink class="text-[#42454D] text-sm" :to="link.to">{{
+                    <NuxtLink class="text-[#42454D] text-sm" :to="link.link">{{
                       link.name
                     }}</NuxtLink>
                   </li>
@@ -48,7 +48,7 @@ const isDrawerOpened = ref(false);
         <ul class="flex gap-4">
           <template v-for="link in navLinks" :key="link.name">
             <li>
-              <NuxtLink class="text-[#42454D] font-light" :to="link.to">{{
+              <NuxtLink class="text-[#42454D] font-light" :to="link.link">{{
                 link.name
               }}</NuxtLink>
             </li>
