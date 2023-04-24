@@ -1,0 +1,5 @@
+/* Base styling/pre-flight is using Tailwind's by default, only write your pre-flight style here if necessary */
+
+a.router-link-active {
+  @apply !text-primary;
+}
