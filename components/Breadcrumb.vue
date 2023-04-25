@@ -23,7 +23,9 @@ const crumbsComputed = computed(() => {
   <nav>
     <ul class="flex items-center text-[#9CA3AF] gap-1">
       <template v-for="crumb in crumbsComputed" :key="crumb.link">
-        <li>
+        <li
+          class="max-w-[8rem] sm:max-w-[15rem] md:max-w-[20rem] whitespace-nowrap overflow-hidden text-ellipsis"
+        >
           <NuxtLink :to="crumb.link">{{ crumb.name }}</NuxtLink>
         </li>
 
