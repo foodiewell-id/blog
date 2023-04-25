@@ -8,8 +8,12 @@ module.exports = {
         primary: {
           DEFAULT: "#E86900",
           surface: "#FFF5CD",
+          light: "#FFFAF5",
         },
-        grey: "#616161",
+        grey: {
+          DEFAULT: "#616161",
+          light: "#e0e0e0",
+        },
       },
     },
   },
