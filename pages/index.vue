@@ -8,7 +8,7 @@
         Tambah Pengetahuan Dengan Membaca Artikel Menarik di Foodiewell
       </h1>
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 justify-items-center pb-3 md:p-5"
+        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 justify-items-center pb-3 md:p-5 max-w-7xl mx-auto"
       >
         <template v-for="i in 12" :key="i">
           <ArticleCard />
