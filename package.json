@@ -12,5 +12,8 @@
     "@nuxtjs/tailwindcss": "^6.6.6",
     "@types/node": "^18",
     "nuxt": "^3.4.2"
+  },
+  "dependencies": {
+    "vue-awesome-paginate": "^1.1.46"
   }
 }
