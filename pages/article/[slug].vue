@@ -17,7 +17,8 @@ const articleReference =
 </script>
 
 <template>
-  <article class="p-5 container mx-auto">
+  <article class="p-5 container mx-auto relative">
+    <ShareBox />
     <Breadcrumb
       :crumbs="[
         { name: 'Title xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', link: '#' },
