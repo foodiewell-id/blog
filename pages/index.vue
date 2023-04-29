@@ -28,24 +28,24 @@ if (data.value && data.value.errors) {
 }
 </script>
 <template>
-  <div>
-    <!-- TODO: Maybe can HOC component -->
-    <div v-if="error || !data">Uh oh, error!</div>
-    <div v-else class="container mx-auto my-5 px-5 md:px-0">
-      <Breadcrumb />
-      <div
-        class="flex flex-col justify-center pb-3 md:p-5 max-w-7xl mx-auto items-center"
-      >
-        <h1
-          class="text-center mt-12 text-lg md:text-2xl md:font-medium max-w-md mx-auto"
-        >
-          Tambah Pengetahuan Dengan Membaca Artikel Menarik di Foodiewell
-        </h1>
+  <div class="container mx-auto my-5 px-5 md:px-0">
+    <Breadcrumb />
+    <h1
+      class="text-center mt-12 text-lg md:text-2xl md:font-medium max-w-md mx-auto"
+    >
+      Tambah Pengetahuan Dengan Membaca Artikel Menarik di Foodiewell
+    </h1>
+    <ErrorLoading
+      :error="error"
+      :loading="pending"
+      class="md:p-5 pb-3 max-w-7xl mx-auto mt-8"
+    >
+      <div class="flex flex-col justify-center items-center">
         <div
-          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 justify-items-center mb-10"
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-items-center mb-10"
         >
           <template
-            v-for="article in data.data.allArticles"
+            v-for="article in data!!.data.allArticles"
             :key="article.title"
           >
             <ArticleCard :article="article" />
@@ -54,12 +54,12 @@ if (data.value && data.value.errors) {
         <Pagination
           class="self-end"
           v-model="currentPage"
-          :total-items="data.data._allArticlesMeta.count"
+          :total-items="data!!.data._allArticlesMeta.count"
           :items-per-page="paginationMaxResult"
           :max-pages-shown="4"
           @update:model-value="refresh"
         />
       </div>
-    </div>
+    </ErrorLoading>
   </div>
 </template>
