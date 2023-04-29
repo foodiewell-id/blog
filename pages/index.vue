@@ -31,6 +31,7 @@ if (data.value && data.value.errors) {
   <div class="container mx-auto my-5 px-5 md:px-0">
     <Breadcrumb />
     <h1
+      v-if="!error"
       class="text-center mt-12 text-lg md:text-2xl md:font-medium max-w-md mx-auto"
     >
       Tambah Pengetahuan Dengan Membaca Artikel Menarik di Foodiewell
