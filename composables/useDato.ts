@@ -1,16 +1,13 @@
-import DatoDTO from "~/types/DatoDTO";
-
 export default () => {
   const {
-    public: { paginationMaxResult, datocmsContentDeliveryUrl, datocmsToken },
+    public: { datocmsContentDeliveryUrl, datocmsToken },
   } = useRuntimeConfig();
 
-  const getAllArticlesGraphQLQuery = (
-    page: number,
-    first: number = paginationMaxResult
-  ) => {
-    // TODO: SEPARATE THIS TO usePagination() - FOR TESTABLE/TDD SAKE
-    const skip = (page - 1) * first;
+  const { getSkip } = usePagination();
+
+  const getAllArticlesGraphQLQuery = (page: number, first?: number) => {
+    const skip = getSkip(page, first);
+
     return `
     {
       allArticles(first: "${first}", skip: "${skip}") {

@@ -6,6 +6,7 @@ const currentPage = ref(1);
 
 const { getAllArticlesGraphQLQuery, datocmsContentDeliveryUrl, datocmsToken } =
   useDato();
+const { paginationMaxResult } = usePagination();
 
 const { data, refresh, pending, error } = await useAsyncData<
   DatoDTO<AllArticlesDTO>
@@ -16,7 +17,7 @@ const { data, refresh, pending, error } = await useAsyncData<
       authorization: `Bearer ${datocmsToken}`,
     },
     body: JSON.stringify({
-      query: getAllArticlesGraphQLQuery(currentPage.value),
+      query: getAllArticlesGraphQLQuery(currentPage.value, paginationMaxResult),
     }),
   })
 );
@@ -54,7 +55,7 @@ if (data.value && data.value.errors) {
           class="self-end"
           v-model="currentPage"
           :total-items="data.data._allArticlesMeta.count"
-          :items-per-page="5"
+          :items-per-page="paginationMaxResult"
           :max-pages-shown="4"
           @update:model-value="refresh"
         />
