@@ -6,4 +6,11 @@ export default defineNuxtConfig({
     "@/assets/css/base.css",
     "@/assets/css/transitions.css",
   ],
+  runtimeConfig: {
+    public: {
+      datocmsToken: "",
+      datocmsContentDeliveryUrl: "",
+      paginationMaxResult: 5,
+    },
+  },
 });

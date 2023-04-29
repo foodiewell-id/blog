@@ -1,31 +1,64 @@
 <script setup lang="ts">
+import DatoDTO from "~/types/DatoDTO";
+import { AllArticlesDTO } from "~/types/Article";
+
 const currentPage = ref(1);
+
+const { getAllArticlesGraphQLQuery, datocmsContentDeliveryUrl, datocmsToken } =
+  useDato();
+
+const { data, refresh, pending, error } = await useAsyncData<
+  DatoDTO<AllArticlesDTO>
+>(`all articles page: ${currentPage.value}`, () =>
+  $fetch(datocmsContentDeliveryUrl, {
+    method: "POST",
+    headers: {
+      authorization: `Bearer ${datocmsToken}`,
+    },
+    body: JSON.stringify({
+      query: getAllArticlesGraphQLQuery(currentPage.value),
+    }),
+  })
+);
+
+if (data.value && data.value.errors) {
+  // if data.value is present, then error.value is definitely non existent. So, assign error.value with the API's error response
+  error.value = new Error(data.value.errors[0].message);
+}
 </script>
 <template>
-  <div class="container mx-auto my-5 px-5 md:px-0">
-    <Breadcrumb />
-    <div
-      class="flex flex-col justify-center pb-3 md:p-5 max-w-7xl mx-auto items-center"
-    >
-      <h1
-        class="text-center mt-12 text-lg md:text-2xl md:font-medium max-w-md mx-auto"
-      >
-        Tambah Pengetahuan Dengan Membaca Artikel Menarik di Foodiewell
-      </h1>
+  <div>
+    <!-- TODO: Maybe can HOC component -->
+    <div v-if="error || !data">Uh oh, error!</div>
+    <div v-else class="container mx-auto my-5 px-5 md:px-0">
+      <Breadcrumb />
       <div
-        class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 justify-items-center mb-10"
+        class="flex flex-col justify-center pb-3 md:p-5 max-w-7xl mx-auto items-center"
       >
-        <template v-for="i in 12" :key="i">
-          <ArticleCard />
-        </template>
+        <h1
+          class="text-center mt-12 text-lg md:text-2xl md:font-medium max-w-md mx-auto"
+        >
+          Tambah Pengetahuan Dengan Membaca Artikel Menarik di Foodiewell
+        </h1>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-8 justify-items-center mb-10"
+        >
+          <template
+            v-for="article in data.data.allArticles"
+            :key="article.title"
+          >
+            <ArticleCard :article="article" />
+          </template>
+        </div>
+        <Pagination
+          class="self-end"
+          v-model="currentPage"
+          :total-items="data.data._allArticlesMeta.count"
+          :items-per-page="5"
+          :max-pages-shown="4"
+          @update:model-value="refresh"
+        />
       </div>
-      <Pagination
-        class="self-end"
-        v-model="currentPage"
-        :total-items="50"
-        :items-per-page="5"
-        :max-pages-shown="4"
-      />
     </div>
   </div>
 </template>
