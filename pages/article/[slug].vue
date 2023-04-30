@@ -8,6 +8,8 @@ const {
   datocmsToken,
   getArticleBySlugGraphQLQuery,
 } = useDato();
+const { formatIDDate } = useDate();
+const { abbreviateNumberWithK } = useNumber();
 
 const { data, error, pending } = await useAsyncData<DatoDTO<ArticleDTO>>(
   slug.toString(),
@@ -36,7 +38,7 @@ if (data.value && data.value.errors) {
       <ShareBox />
       <Breadcrumb
         :crumbs="[
-          { name: data!!.data.article.title, link: '#' },
+          { name: data!!.data.article.title, link: `/article/${slug}` },
         ]"
       />
       <div class="flex justify-center flex-col mt-8 max-w-screen-md mx-auto">
@@ -63,7 +65,7 @@ if (data.value && data.value.errors) {
               >
             </address>
             <span>&bull;</span>
-            <time>{{ data!!.data.article.updatedAt }}</time>
+            <time>{{ formatIDDate(data!!.data.article.updatedAt) }}</time>
             <span>&bull;</span>
             <div class="text-sm -mt-1">
               <img
@@ -72,7 +74,7 @@ if (data.value && data.value.errors) {
                 class="inline-block"
               />
               <span class="-mb-6 ml-1 inline-block">{{
-                data?.data.article.viewscount
+                abbreviateNumberWithK(data!!.data.article.viewscount)
               }}</span>
             </div>
           </div>
