@@ -8,6 +8,7 @@ export default defineNuxtConfig({
   ],
   runtimeConfig: {
     public: {
+      datocmsFullAccessApiToken: "",
       datocmsToken: "",
       datocmsContentDeliveryUrl: "",
       paginationMaxResult: 5,

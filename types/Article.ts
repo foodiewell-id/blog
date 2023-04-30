@@ -25,6 +25,7 @@ export interface ArticleDTO {
 }
 
 interface Article {
+  id: string;
   thumbnail: Thumbnail;
   title: string;
   tag: string;

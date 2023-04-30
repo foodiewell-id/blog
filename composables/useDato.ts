@@ -1,6 +1,12 @@
+import DatoCMSClientConfig from "~/config/datocmsClientConfig";
+
 export default () => {
   const {
-    public: { datocmsContentDeliveryUrl, datocmsToken },
+    public: {
+      datocmsContentDeliveryUrl,
+      datocmsToken,
+      datocmsFullAccessApiToken,
+    },
   } = useRuntimeConfig();
 
   const { getSkip } = usePagination();
@@ -29,6 +35,7 @@ export default () => {
   const getArticleBySlugGraphQLQuery = (slug: string) => `
   {
     article(filter: {slug: {eq: "${slug}"}}) {
+      id
       thumbnail {
         url
       }
@@ -47,10 +54,58 @@ export default () => {
   }
   `;
 
+  const publishRecord = async (
+    recordId: string,
+    datoCmsClientConfig: DatoCMSClientConfig,
+    recursive: boolean = false
+  ) => {
+    try {
+      const item = await datoCmsClientConfig
+        .getClient()
+        .items.publish(recordId, { recursive });
+
+      return item;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  /**
+   * update article's views count and publish it
+   * @param viewsCount
+   * @param articleRecordsId
+   * @param datoCmsClientConfig
+   * @returns the updated and published article's item
+   */
+  const updateArticleViewsCount = async (
+    viewsCount: number,
+    articleRecordsId: string,
+    datoCmsClientConfig: DatoCMSClientConfig
+  ) => {
+    try {
+      const updatedItem = await datoCmsClientConfig
+        .getClient()
+        .items.update(articleRecordsId, {
+          viewscount: viewsCount,
+        });
+
+      const publishedItem = await publishRecord(
+        updatedItem.id,
+        datoCmsClientConfig
+      );
+      return publishedItem;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return {
     datocmsContentDeliveryUrl,
     datocmsToken,
     getAllArticlesGraphQLQuery,
     getArticleBySlugGraphQLQuery,
+    updateArticleViewsCount,
+    DatoCMSClientConfig,
+    datocmsFullAccessApiToken,
   };
 };

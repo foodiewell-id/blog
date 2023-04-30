@@ -7,9 +7,16 @@ const {
   datocmsContentDeliveryUrl,
   datocmsToken,
   getArticleBySlugGraphQLQuery,
+  updateArticleViewsCount,
+  DatoCMSClientConfig,
+  datocmsFullAccessApiToken,
 } = useDato();
 const { formatIDDate } = useDate();
 const { abbreviateNumberWithK } = useNumber();
+
+const datoCMSClientConfigInstance = DatoCMSClientConfig.getInstance(
+  datocmsFullAccessApiToken
+);
 
 const { data, error, pending } = await useAsyncData<DatoDTO<ArticleDTO>>(
   slug.toString(),
@@ -30,6 +37,19 @@ if (data.value && data.value.errors) {
   // if data.value is present, then error.value is definitely non existent. So, assign error.value with the API's error response
   error.value = new Error(data.value.errors[0].message);
 }
+
+onMounted(async () => {
+  if (!error.value && data.value) {
+    // when the user atleast views the article for 2s. Then, update the article's views count + 1
+    setTimeout(async () => {
+      await updateArticleViewsCount(
+        data.value!!.data.article.viewscount + 1,
+        data.value!!.data.article.id,
+        datoCMSClientConfigInstance
+      );
+    }, 2000);
+  }
+});
 </script>
 
 <template>
