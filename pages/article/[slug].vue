@@ -35,7 +35,10 @@ if (data.value && data.value.errors) {
 <template>
   <ErrorLoading :loading="pending" :error="error">
     <article class="p-5 container mx-auto relative">
-      <ShareBox />
+      <ShareBox
+        :article-title="data!!.data.article.title"
+        :article-slug="data!!.data.article.slug"
+      />
       <Breadcrumb
         :crumbs="[
           { name: data!!.data.article.title, link: `/article/${slug}` },

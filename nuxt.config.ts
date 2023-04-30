@@ -11,6 +11,9 @@ export default defineNuxtConfig({
       datocmsToken: "",
       datocmsContentDeliveryUrl: "",
       paginationMaxResult: 5,
+      linkTelegramGroup: "",
+      shareText: "",
+      shareLinkBaseUrl: "",
     },
   },
 });
