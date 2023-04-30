@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { toHead } from "vue-datocms";
 import DatoDTO from "~/types/DatoDTO";
 import { ArticleDTO } from "~/types/Article";
 
@@ -49,6 +50,12 @@ onMounted(async () => {
       );
     }, 2000);
   }
+});
+
+useHead(() => {
+  if (error.value && !data.value) return {};
+
+  return toHead(data.value!!.data.article.seo);
 });
 </script>
 

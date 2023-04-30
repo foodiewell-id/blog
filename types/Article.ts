@@ -35,6 +35,7 @@ interface Article {
   body: string;
   reference: string;
   slug: string;
+  seo: SEO[];
 }
 
 interface Author {
@@ -51,4 +52,10 @@ export interface ResponsiveImage {
   base64: string;
   bgColor: string;
   sizes: string;
+}
+
+export interface SEO {
+  attributes: Record<string, string> | null;
+  content: null | string;
+  tag: string;
 }

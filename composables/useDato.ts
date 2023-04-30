@@ -72,6 +72,11 @@ export default () => {
       body
       reference
       slug
+      seo: _seoMetaTags {
+        attributes
+        content
+        tag
+      }
     }
   }
   `;
