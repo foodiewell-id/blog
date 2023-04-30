@@ -26,9 +26,31 @@ export default () => {
     `;
   };
 
+  const getArticleBySlugGraphQLQuery = (slug: string) => `
+  {
+    article(filter: {slug: {eq: "${slug}"}}) {
+      thumbnail {
+        url
+      }
+      title
+      tag
+      author {
+        authorName
+        linkedinLink
+      }
+      updatedAt
+      viewscount
+      body
+      reference
+      slug
+    }
+  }
+  `;
+
   return {
     datocmsContentDeliveryUrl,
     datocmsToken,
     getAllArticlesGraphQLQuery,
+    getArticleBySlugGraphQLQuery,
   };
 };

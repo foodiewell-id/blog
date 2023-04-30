@@ -19,3 +19,24 @@ interface AllArticlesMeta {
 interface Thumbnail {
   url: string;
 }
+
+export interface ArticleDTO {
+  article: Article;
+}
+
+interface Article {
+  thumbnail: Thumbnail;
+  title: string;
+  tag: string;
+  author: Author;
+  updatedAt: string;
+  viewscount: number;
+  body: string;
+  reference: string;
+  slug: string;
+}
+
+interface Author {
+  authorName: string;
+  linkedinLink: string;
+}
