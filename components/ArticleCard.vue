@@ -15,10 +15,9 @@ defineProps({
     class="border border-grey-light rounded-md shadow-sm max-w-[18rem] cursor-pointer hover:border-primary focus:outline-primary transition-all overflow-hidden"
   >
     <article class="h-full">
-      <img
+      <datocms-image
         class="w-full border-grey-light object-cover border-b h-[12rem]"
-        :src="article.thumbnail.url"
-        :alt="article.title"
+        :data="article.thumbnail.responsiveImage"
       />
       <div class="p-5 pt-4 h-full">
         <Tag>{{ article.tag }}</Tag>

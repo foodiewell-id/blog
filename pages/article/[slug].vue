@@ -66,9 +66,8 @@ onMounted(async () => {
       />
       <div class="flex justify-center flex-col mt-8 max-w-screen-md mx-auto">
         <header>
-          <img
-            :src="data!!.data.article.thumbnail.url"
-            :alt="data!!.data.article.title"
+          <datocms-image
+            :data="data!!.data.article.thumbnail.responsiveImage"
             class="rounded-md max-h-[25rem] object-cover w-full"
           />
           <h1 class="mt-5 text-xl font-medium">

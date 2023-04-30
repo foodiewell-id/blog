@@ -18,7 +18,18 @@ export default () => {
     {
       allArticles(first: "${first}", skip: "${skip}") {
         thumbnail {
-          url
+          responsiveImage(
+            imgixParams: { fit: crop, w: 400, h: 400, auto: format }) 
+          {
+              src
+              width
+              height
+              alt
+              title
+              base64
+              bgColor
+              sizes
+          }
         }
         title
         tag
@@ -37,7 +48,18 @@ export default () => {
     article(filter: {slug: {eq: "${slug}"}}) {
       id
       thumbnail {
-        url
+        responsiveImage(
+          imgixParams: { fit: crop, w: 500, h: 500, auto: format }) 
+        {
+            src
+            width
+            height
+            alt
+            title
+            base64
+            bgColor
+            sizes
+        }
       }
       title
       tag

@@ -17,7 +17,7 @@ interface AllArticlesMeta {
 }
 
 interface Thumbnail {
-  url: string;
+  responsiveImage: ResponsiveImage;
 }
 
 export interface ArticleDTO {
@@ -40,4 +40,15 @@ interface Article {
 interface Author {
   authorName: string;
   linkedinLink: string;
+}
+
+export interface ResponsiveImage {
+  src: string;
+  width: number;
+  height: number;
+  alt: null;
+  title: null;
+  base64: string;
+  bgColor: string;
+  sizes: string;
 }
