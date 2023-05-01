@@ -3,6 +3,8 @@ export default defineNuxtConfig({
   app: {
     head: {
       link: [{ rel: "icon", type: "image/png", href: "/favicon.png" }],
+      titleTemplate: "%s - Blog Foodiewell",
+      title: "Baca Artikel Menarik di Foodiewell!",
     },
   },
   modules: ["@nuxtjs/tailwindcss"],
